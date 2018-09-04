@@ -2,10 +2,17 @@ package com.spring.boot.microservices;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
 public class User {
 	
 	private Integer id;
+	
+	@Size(min = 3, message = "At least 3 chars required.")
 	private String name;
+	
+	@Past
 	private LocalDateTime dob;
 	
 	protected User() {}

@@ -1,11 +1,15 @@
 package com.spring.boot.microservices;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+
 import java.net.URI;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,13 +33,15 @@ public class UserResource {
 	}
 	
 	@GetMapping("/users/{id}")
-	public User getUser(@PathVariable int id) {
+	public Resource<User> getUser(@PathVariable int id) {
 		var user = userDaoService.getUser(id);
 		
 		if(null == user) {
 			throw new UserNotFoundException("id="+id);
-		}else {
-			return user;
+		}else {			
+			Resource<User> resource = new Resource<>(user);
+			resource.add(linkTo(methodOn(this.getClass()).getAllUsers()).withRel("all-users"));			
+			return resource;
 		}			
 	}
 	

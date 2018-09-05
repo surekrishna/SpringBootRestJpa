@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.boot.microservices.domain.HelloWorldBean;
+
+
+
 @RestController
 public class HelloWorldController {
 	

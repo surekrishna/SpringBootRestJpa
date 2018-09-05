@@ -1,4 +1,4 @@
-package com.spring.boot.microservices;
+package com.spring.boot.microservices.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import com.spring.boot.microservices.domain.User;
 
 @Component
 public class UserDaoService {

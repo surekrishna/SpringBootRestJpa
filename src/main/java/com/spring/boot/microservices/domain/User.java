@@ -1,4 +1,4 @@
-package com.spring.boot.microservices;
+package com.spring.boot.microservices.domain;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +15,7 @@ public class User {
 	@Past
 	private LocalDateTime dob;
 	
-	protected User() {}
+	public User() {}
 	
 	public User(Integer id, String name, LocalDateTime dob) {
 		super();

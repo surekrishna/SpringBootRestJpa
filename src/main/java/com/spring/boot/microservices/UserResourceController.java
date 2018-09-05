@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.spring.boot.microservices.domain.User;
 import com.spring.boot.microservices.exception.UserNotFoundException;
+import com.spring.boot.microservices.service.UserDaoService;
 
 @RestController
-public class UserResource {
+public class UserResourceController {
 	
 	@Autowired
 	private UserDaoService userDaoService;

@@ -1,4 +1,4 @@
-package com.spring.boot.microservices;
+package com.spring.boot.microservices.domain;
 
 public class HelloWorldBean {
 	

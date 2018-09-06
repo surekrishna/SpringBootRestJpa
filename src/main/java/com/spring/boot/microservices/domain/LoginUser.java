@@ -1,23 +1,24 @@
 package com.spring.boot.microservices.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
+@JsonFilter("LoginUserFilter") //Dynamic Filter
 public class LoginUser {
 
 	private int id;
 	private String userName;	
-	@JsonIgnore
+	//@JsonIgnore //Static Filter
 	private String password;
-	private boolean isActive;
+	private boolean status;
 	
 	public LoginUser(){ }
-	
-	public LoginUser(int id, String userName, String password, boolean isActive) {
+
+	public LoginUser(int id, String userName, String password, boolean status) {
 		super();
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
-		this.isActive = isActive;
+		this.status = status;
 	}
 
 	public int getId() {
@@ -44,18 +45,17 @@ public class LoginUser {
 		this.password = password;
 	}
 
-	public boolean isActive() {
-		return isActive;
+	public boolean isStatus() {
+		return status;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
-		return "LoginUser [id=" + id + ", userName=" + userName + ", password=" + password + ", isActive=" + isActive
-				+ "]";
+		return "LoginUser [id=" + id + ", userName=" + userName + ", password=" + password + ", status=" + status + "]";
 	}
-			
+				
 }

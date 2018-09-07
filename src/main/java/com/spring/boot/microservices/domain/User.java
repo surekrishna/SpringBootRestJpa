@@ -58,9 +58,18 @@ public class User {
 	public void setDob(LocalDateTime dob) {
 		this.dob = dob;
 	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", dob=" + dob + "]";
+	
+	public List<Post> getPosts() {
+		return posts;
 	}
 
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", dob=" + dob + ", posts=" + posts + "]";
+	}
+	
 }

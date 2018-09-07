@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.spring.boot.microservices.dao.UserRepository;
+import com.spring.boot.microservices.domain.Post;
 import com.spring.boot.microservices.domain.User;
 import com.spring.boot.microservices.exception.UserNotFoundException;
 
@@ -60,6 +61,17 @@ public class UserJpaController {
 	@DeleteMapping("/jpa/users/{id}")
 	public void deleteUser(@PathVariable int id) {
 		this.userRepository.deleteById(id);		
+	}
+	
+	@GetMapping("/jpa/users/{id}/posts")
+	public List<Post> getPosts(@PathVariable int id) {
+		Optional<User> user = this.userRepository.findById(id);
+		
+		if(!user.isPresent()) {
+			throw new UserNotFoundException("id="+id);
+		}									
+			
+		return user.get().getPosts();		
 	}
 
 }

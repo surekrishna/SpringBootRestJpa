@@ -5,8 +5,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import io.swagger.annotations.ApiModelProperty;
 
 @Entity
 public class Post {
@@ -14,6 +17,9 @@ public class Post {
 	@Id
 	@GeneratedValue
 	private int id;
+	
+	@ApiModelProperty(notes="At least 5 characters required.")
+	@Size(min=5, message="At least 5 characters required.")
 	private String description;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

@@ -79,7 +79,7 @@ public class UserJpaController {
 	}
 	
 	@PostMapping("/jpa/users/{id}/posts")
-	public ResponseEntity<Object> createPost(@PathVariable int id, @RequestBody Post post) {
+	public ResponseEntity<Object> createPost(@PathVariable int id, @Valid @RequestBody Post post) {
 		Optional<User> user = this.userRepository.findById(id);
 		
 		if(!user.isPresent()) {

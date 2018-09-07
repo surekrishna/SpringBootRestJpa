@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.spring.boot.microservices.dao.PostRepository;
 import com.spring.boot.microservices.dao.UserRepository;
 import com.spring.boot.microservices.domain.Post;
 import com.spring.boot.microservices.domain.User;
@@ -30,6 +31,9 @@ public class UserJpaController {
 		
 	@Autowired
 	private UserRepository userRepository; 
+	
+	@Autowired
+	private PostRepository postRepository;
 
 	@GetMapping("/jpa/users")
 	public List<User> getAllUsers(){
@@ -72,6 +76,23 @@ public class UserJpaController {
 		}									
 			
 		return user.get().getPosts();		
+	}
+	
+	@PostMapping("/jpa/users/{id}/posts")
+	public ResponseEntity<Object> createPost(@PathVariable int id, @RequestBody Post post) {
+		Optional<User> user = this.userRepository.findById(id);
+		
+		if(!user.isPresent()) {
+			throw new UserNotFoundException("id="+id);
+		}		
+		
+		User usser = user.get();
+		post.setUser(usser);
+		Post createdPost = this.postRepository.save(post);
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("{id}").buildAndExpand(createdPost.getId()).toUri();
+		
+		return ResponseEntity.created(location).build();
 	}
 
 }
